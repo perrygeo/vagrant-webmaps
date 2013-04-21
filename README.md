@@ -8,3 +8,6 @@
 * Serve with uwsgi and nginx
 * View with leaflet
 
+
+#### Notes
+./bin/carto ./files/<your project>/<your project>.mml > mapnik.xml

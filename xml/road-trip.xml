@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="#c0e0f8" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+
+<Parameters>
+  <Parameter name="bounds">-180,-85.05112877980659,180,85.05112877980659</Parameter>
+  <Parameter name="center">-96.33532714843722,33.67337400440639,4</Parameter>
+  <Parameter name="format">png</Parameter>
+  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="maxzoom">22</Parameter>
+  <Parameter name="name"><![CDATA[Road Trip]]></Parameter>
+  <Parameter name="description"><![CDATA[A map of the United States inspired by the impossible-to-fold maps in your glovebox.]]></Parameter>
+</Parameters>
+
+<FontSet name="fontset-0">
+  <Font face-name="Times New Roman Regular"/>
+  <Font face-name="FreeSerif Medium"/>
+  <Font face-name="DejaVu Serif Book"/>
+</FontSet>
+<FontSet name="fontset-1">
+  <Font face-name="Arial Bold"/>
+  <Font face-name="Liberation Sans Bold"/>
+  <Font face-name="DejaVu Sans Bold"/>
+</FontSet>
+<FontSet name="fontset-2">
+  <Font face-name="Times New Roman Italic"/>
+  <Font face-name="FreeSerif Italic"/>
+  <Font face-name="DejaVu Serif Italic"/>
+</FontSet>
+<Style name="countries-fill" filter-mode="first" >
+  <Rule>
+    <Filter>([ADM0_A3] = 'USA')</Filter>
+    <PolygonSymbolizer fill="#fffbf3" gamma="0.75" />
+  </Rule>
+  <Rule>
+    <PolygonSymbolizer fill="#fff1cf" gamma="0.75" />
+  </Rule>
+</Style>
+<Style name="countries-outline" filter-mode="first" >
+  <Rule>
+    <LineSymbolizer stroke="#88ccee" stroke-width="1.6" />
+  </Rule>
+</Style>
+<Layer name="countries"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>countries-outline</StyleName>
+    <StyleName>countries-fill</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/countries/82945364-10m-admin-0-countries.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="us-parks" filter-mode="first" >
+  <Rule>
+    <LineSymbolizer stroke="#aadd99" />
+    <PolygonSymbolizer fill="#ddeebb" />
+  </Rule>
+</Style>
+<Layer name="us-parks"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>us-parks</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/us-parks/ecab7e8a-10m-us-parks-area.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="us-park-line" filter-mode="first" >
+  <Rule>
+    <LineSymbolizer stroke="#aadd99" />
+  </Rule>
+</Style>
+<Layer name="us-park-line"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>us-park-line</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/us-park-line/bee6ae34-10m-us-parks-line.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="lake" filter-mode="first" >
+</Style>
+<Style name="lake-fill" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 9)</Filter>
+    <PolygonSymbolizer fill="#c0e0f8" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 8)</Filter>
+    <PolygonSymbolizer fill="#c0e0f8" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 7)</Filter>
+    <PolygonSymbolizer fill="#c0e0f8" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 6)</Filter>
+    <PolygonSymbolizer fill="#c0e0f8" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 5)</Filter>
+    <PolygonSymbolizer fill="#c0e0f8" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>200000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 4)</Filter>
+    <PolygonSymbolizer fill="#c0e0f8" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>500000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 3)</Filter>
+    <PolygonSymbolizer fill="#c0e0f8" />
+  </Rule>
+  <Rule>
+    <Filter>([ScaleRank] &lt;= 2)</Filter>
+    <PolygonSymbolizer fill="#c0e0f8" />
+  </Rule>
+</Style>
+<Style name="lake-outline" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 9)</Filter>
+    <LineSymbolizer stroke="#88ccee" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 6)</Filter>
+    <LineSymbolizer stroke="#88ccee" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 5)</Filter>
+    <LineSymbolizer stroke="#88ccee" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>200000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 4)</Filter>
+    <LineSymbolizer stroke="#88ccee" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>500000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 3)</Filter>
+    <LineSymbolizer stroke="#88ccee" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 7)</Filter>
+    <LineSymbolizer stroke="#88ccee" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <Filter>([ScaleRank] = 8)</Filter>
+    <LineSymbolizer stroke="#88ccee" />
+  </Rule>
+  <Rule>
+    <Filter>([ScaleRank] &lt;= 2)</Filter>
+    <LineSymbolizer stroke="#88ccee" />
+  </Rule>
+</Style>
+<Layer name="lake"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>lake-outline</StyleName>
+    <StyleName>lake-fill</StyleName>
+    <StyleName>lake</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/lake/da493aa5-10m-lakes.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="state_line" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <Filter>([ADM0_A3] = 'USA')</Filter>
+    <LineSymbolizer stroke-dasharray="2, 2, 10, 2" stroke-width="0.6" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <Filter>([ADM0_A3] = 'CAN')</Filter>
+    <LineSymbolizer stroke-dasharray="2, 2, 10, 2" stroke-width="0.6" />
+  </Rule>
+</Style>
+<Style name="state_line-glow" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <Filter>([ADM0_A3] = 'USA')</Filter>
+    <LineSymbolizer stroke="#ffdd00" stroke-opacity="0.2" stroke-width="3" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <Filter>([ADM0_A3] = 'CAN')</Filter>
+    <LineSymbolizer stroke="#ffdd00" stroke-opacity="0.2" stroke-width="3" />
+  </Rule>
+</Style>
+<Layer name="state_line"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>state_line-glow</StyleName>
+    <StyleName>state_line</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/state_line/80b26bd1-10m-admin-1-states-provinces-lines.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="country_border_marine" filter-mode="first" >
+  <Rule>
+    <LineSymbolizer stroke="#aa0066" stroke-dasharray="8, 2" stroke-opacity="0.3" stroke-width="0.8" />
+  </Rule>
+</Style>
+<Layer name="country_border_marine"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>country_border_marine</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/country_border_marine/5e284201-10m-admin-0-boundary-lines-maritime-indicator.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="road-l" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([Type] = 'Secondary Highway')</Filter>
+    <LineSymbolizer stroke-width="1.3" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([Type] = 'Secondary Highway')</Filter>
+    <LineSymbolizer stroke-width="0.8" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([Type] = 'Secondary Highway')</Filter>
+    <LineSymbolizer stroke-width="0.6" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <Filter>([Type] = 'Secondary Highway')</Filter>
+    <LineSymbolizer stroke-width="0.3" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <MinScaleDenominator>50000000</MinScaleDenominator>
+    <Filter>([Type] = 'Secondary Highway')</Filter>
+    <LineSymbolizer stroke-width="0.2" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <Filter>([Type] = 'Secondary Highway')</Filter>
+    <LineSymbolizer stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([Type] = 'Major Highway')</Filter>
+    <LineSymbolizer stroke-width="2.6" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([Type] = 'Major Highway')</Filter>
+    <LineSymbolizer stroke-width="2" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([Type] = 'Major Highway')</Filter>
+    <LineSymbolizer stroke-width="1.2" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <Filter>([Type] = 'Major Highway')</Filter>
+    <LineSymbolizer stroke-width="0.6" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <MinScaleDenominator>50000000</MinScaleDenominator>
+    <Filter>([Type] = 'Major Highway')</Filter>
+    <LineSymbolizer stroke-width="0.5" stroke="#cc3333" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <Filter>([Type] = 'Major Highway')</Filter>
+    <LineSymbolizer stroke="#cc3333" />
+  </Rule>
+</Style>
+<Layer name="road"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>road-l</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/road/7c44ba3a-10m-roads.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="rail" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <LineSymbolizer stroke="#999999" stroke-width="0.6" />
+  </Rule>
+</Style>
+<Layer name="rail"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>rail</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/rail/e6342138-10m-railroads.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="country_border" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="1" stroke="#440088" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.8" stroke="#440088" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <MinScaleDenominator>50000000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.6" stroke="#440088" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>100000000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.4" stroke="#440088" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <LineSymbolizer stroke="#440088" />
+  </Rule>
+</Style>
+<Style name="country_border-glow" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <LineSymbolizer stroke="#ff6600" stroke-opacity="0.33" stroke-width="4" />
+  </Rule>
+</Style>
+<Layer name="country_border"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>country_border-glow</StyleName>
+    <StyleName>country_border</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/country_border/16c795c6-10m-admin-0-boundary-lines-land.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="road_na" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <Filter>([TYPE] = 'Primary')</Filter>
+    <LineSymbolizer stroke="#ee6633" stroke-width="0.8" />
+  </Rule>
+</Style>
+<Layer name="road_na"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>road_na</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/road_na/f4eeda21-10m-roads-north-america.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="country_label" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([ADM0_A3] = 'CAN')</Filter>
+    <TextSymbolizer fontset-name="fontset-0" text-transform="uppercase" character-spacing="1" line-spacing="4" size="14" wrap-width="120" allow-overlap="true" halo-radius="2" halo-fill="rgba(255, 255, 255, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([ADM0_A3] = 'USA')</Filter>
+    <TextSymbolizer fontset-name="fontset-0" text-transform="uppercase" character-spacing="1" line-spacing="4" size="14" wrap-width="120" allow-overlap="true" halo-radius="2" halo-fill="rgba(255, 255, 255, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([ADM0_A3] = 'MEX')</Filter>
+    <TextSymbolizer fontset-name="fontset-0" text-transform="uppercase" character-spacing="1" line-spacing="4" size="14" wrap-width="120" allow-overlap="true" halo-radius="2" halo-fill="rgba(255, 255, 255, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="country_label"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>country_label</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/country_label/3e1431a6-10m-admin-0-country-points.shp]]></Parameter>
+       <Parameter name="id"><![CDATA[country_label]]></Parameter>
+       <Parameter name="project"><![CDATA[road-trip]]></Parameter>
+       <Parameter name="srs"><![CDATA[null]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="city" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <Filter>([SOV_A3] = 'USA') and ([SCALERANK] &lt; 4)</Filter>
+    <TextSymbolizer fontset-name="fontset-1" size="9" halo-radius="1" halo-fill="rgba(255, 255, 255, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <Filter>([SOV_A3] = 'USA') and ([SCALERANK] = 4)</Filter>
+    <TextSymbolizer fontset-name="fontset-1" size="9" halo-radius="1" halo-fill="rgba(255, 255, 255, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <Filter>([SOV_A3] = 'USA') and ([SCALERANK] = 5)</Filter>
+    <TextSymbolizer fontset-name="fontset-1" size="9" halo-radius="1" halo-fill="rgba(255, 255, 255, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <Filter>([SOV_A3] = 'USA') and ([SCALERANK] &gt;= 6)</Filter>
+    <TextSymbolizer fontset-name="fontset-1" size="9" halo-radius="1" halo-fill="rgba(255, 255, 255, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="city"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>city</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/city/14bd1506-10m-populated-places-simple.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="park_label" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <TextSymbolizer fontset-name="fontset-2" fill="#006633" size="11" halo-radius="1" halo-fill="rgba(255, 255, 255, 0.75)" wrap-width="30" line-spacing="2" ><![CDATA[[Unit_Name]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="park_label"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>park_label</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/share/mapbox/project/road-trip/layers/park_label/ecab7e8a-10m-us-parks-area.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>

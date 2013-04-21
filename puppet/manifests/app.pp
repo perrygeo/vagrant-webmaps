@@ -31,6 +31,9 @@ package { "python-pip": ensure => "latest"}
 package { "python-dev": ensure => "latest"}
 package { "redis-server": ensure => "latest"}
 package { "supervisor": ensure => "latest"}
+package { "python-imaging": ensure => "latest"}
+package { "libjpeg8": ensure => "latest"}
+package { "libfreetype6": ensure => "latest"}
 
 pip::install {"pip-app":
   requirements => "/usr/local/app/requirements.txt",

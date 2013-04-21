@@ -21,4 +21,11 @@ server {
         uwsgi_pass unix:///var/run/uwsgi/app/tilestache/socket;
         uwsgi_modifier1 30;
     }
+    # Testing Tilestache
+    location /test {
+        # run tilestache-server.py /usr/local/app/tilestache/tilestache.cfg and watch it
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:8080;
+        rewrite  ^/test/(.*)  /$1 break;
+    }
 }
