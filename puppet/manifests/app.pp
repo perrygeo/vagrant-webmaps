@@ -85,8 +85,18 @@ file { "tilemill.config":
   require => Package['tilemill'],
 }
 
+file { "redis.conf":
+  path => "/etc/redis/redis.conf",
+  content => template("redis.conf.ini"),
+  require => Package['redis-server'],
+  owner => "root",
+  group => "root",
+  mode => 0644,
+  notify => Exec['restart_services']
+}
+
 exec { "restart_services":
-  command => "service uwsgi restart && service nginx restart && stop tilemill && start tilemill",
+  command => "service redis-server restart && service uwsgi restart && service nginx restart && stop tilemill && start tilemill",
   path    => "/usr/local/bin/:/bin/:/usr/bin/:/sbin/",
   require =>[File['tilemill.config'], File['tilemill.conf'], File['tiles'], File['tilestache.ini']]
 }

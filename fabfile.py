@@ -62,3 +62,6 @@ def clear_cache():
     Clears ALL the data from the cache. You've been warned.
     """
     run("redis-cli FLUSHALL")
+
+
+# redis-cli INFO | grep used_memory_human
