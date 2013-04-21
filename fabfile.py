@@ -29,4 +29,4 @@ def all():
 
 
 def restart_services():
-    run('sudo service uwsgi restart && sudo service nginx restart')
+    run('sudo service uwsgi restart && sudo service nginx restart && sudo restart tilemill')
