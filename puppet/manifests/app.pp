@@ -38,6 +38,7 @@ package { "libfreetype6": ensure => "latest"}
 pip::install {"pip-app":
   requirements => "/usr/local/app/requirements.txt",
   require => [File["/usr/local/app/requirements.txt"],],
+  subscribe => [Package['python-pip'], Package['python-imaging'],],
 }
 file { "/usr/local/app/requirements.txt":
   path => "/usr/local/app/requirements.txt",
