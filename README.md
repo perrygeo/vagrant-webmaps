@@ -6,20 +6,32 @@
 git clone https://github.com/perrygeo/vagrant-webmaps.git
 cd vagrant-webmaps
 vagrant up
-# go get some coffee and come back in 30 minutes
-# ....
-# point your favorite browser to http://localhost:8088 
-# and get working on those fast, beautiful web maps
 ```
+Now go get some coffee and come back in roughly 30 minutes. Point
+your favorite browser to http://localhost:8088 and get working on 
+those fast, beautiful web maps.
+
+vagrant-webmaps handles the following:
 
 * Builds your virtual server with a single command using Vagrant
 * Automatically installs and configures software with Puppet
 * Remote management with Fabric
 * Allows you to edit maps with Tilemill web interface and the CartoCSS language
-* Renders them with Mapnik
-* Caches them with TileStache and Redis
 * Serves them with uwsgi and nginx
+* Caches them with TileStache and Redis
+* Renders them with Mapnik
 * Allows you to view the maps in a web browser with the OpenLayers-based Madrona layer manager.
+
+### Workflow
+
+I envision this being used to fire up remote servers, load data, style it with TileMill, export 
+the styling to a Mapnik XML file which then gets added to the Tilestache server as auto-magically 
+as possible. 
+
+One could also just export MBTiles from TileMill and serve those directly from TileStache if the 
+geographic extent and zoom levels allowed for small enough tilesets. For maps with very detailed 
+zoom levels over large areas, it is largely a waste to pregenerate the hundreds of millions of tiles
+necessary; tile rendering on-the-fly is a much better option. 
 
 ### Fabric 
 
@@ -42,16 +54,8 @@ Available commands:
 $ fab dev restart_services
 ```
 
-### Notes 
-Default password on tilemill is `user`:`pass`, for goodness sake change it. 
-```
-printf "newuser:$(openssl passwd -crypt newpassword)\n" > /usr/local/app/tilemill-passwords
-```
+### TODO 
 
 This is a work in progress, probably not fully bulletproof yet. YMMV. 
 
-To deploy anywhere other than localhost (no port forwarding available), you should follow
-[this guide](http://mapbox.com/tilemill/docs/guides/ubuntu-service/#configuring_to_listen_for_public_traffic)
- to listening for external ip traffic. Automating this is a big **TODO** in order to get 
- this to deploy on EC2 using the vagrant AWS plugin.
-
+Here's a [list of what I have planned](https://github.com/perrygeo/vagrant-webmaps/wiki/vagrant-webmaps-TODO)
