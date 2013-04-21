@@ -1,10 +1,4 @@
 from fabric.api import *
-from fabric.contrib.files import exists
-import time
-
-vars = {
-    # 'tomcat_version': '6.0.36'
-}
 
 env.forward_agent = True
 env.key_filename = '~/.vagrant.d/insecure_private_key'
@@ -23,10 +17,48 @@ def prod():
     env.hosts = servers
     return servers
 
+
 def all():
     """ Use all servers """
     env.hosts = dev() + prod()
 
 
 def restart_services():
-    run('sudo service uwsgi restart && sudo service nginx restart && sudo restart tilemill')
+    """
+    Restart all map services to ensure config file changes are recognized
+    """
+    run('sudo service uwsgi restart && sudo service uwsgi status tilestache')
+    run('sudo service nginx restart && sudo service nginx status')
+    run('sudo stop tilemill && sudo start tilemill && sudo status tilemill')
+
+
+def runserver():
+    """
+    Run the test tilestache server for debugging; port 8080 or :8088/test/
+    """
+    run("cd /usr/local/app/tilestache && tilestache-server.py tilestache.cfg")
+
+
+def tail_log():
+    """
+    Watch the tilestache logs
+    """
+    run("sudo tail -f /var/log/uwsgi/app/tilestache.log")
+
+
+def clear_layer(layername=None):
+    """
+    Delete keys for a given layer; `clear_layer:test_countries`"
+    """
+    if layername is None:
+        print "Need a layername; try `clear_layer:test_countries`"
+        return False
+
+    run('redis-cli KEYS "*%s*" | xargs redis-cli DEL' % layername)
+
+
+def clear_cache():
+    """
+    Clears ALL the data from the cache. You've been warned.
+    """
+    run("redis-cli FLUSHALL")

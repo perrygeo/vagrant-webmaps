@@ -76,10 +76,19 @@ file { "/etc/nginx/sites-enabled/default":
 
 file { "tilemill.conf":
   path => "/etc/init/tilemill.conf",
-  content => template("tilemill.conf")
+  content => template("tilemill.conf"),
+  require => Package['tilemill'],
 }
 file { "tilemill.config":
   path => "/etc/tilemill/tilemill.config",
-  content => template("tilemill.config")
+  content => template("tilemill.config"),
+  require => Package['tilemill'],
 }
+
+exec { "restart_services":
+  command => "service uwsgi restart && service nginx restart && stop tilemill && start tilemill",
+  path    => "/usr/local/bin/:/bin/:/usr/bin/:/sbin/",
+  require =>[File['tilemill.config'], File['tilemill.conf'], File['tiles'], File['tilestache.ini']]
+}
+
 # TODO http://stackoverflow.com/questions/5068518/what-does-redis-do-when-it-runs-out-of-memory

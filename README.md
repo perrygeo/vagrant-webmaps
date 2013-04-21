@@ -26,5 +26,7 @@ printf "newuser:$(openssl passwd -crypt newpassword)\n" > /usr/local/app/tilemil
 
 This is a work in progress, probably not fully bulletproof yet. YMMV. 
 
-
-
+To deploy anywhere other than localhost (no port forwarding available), you should follow
+[this guide](http://mapbox.com/tilemill/docs/guides/ubuntu-service/#configuring_to_listen_for_public_traffic)
+ to listening for external ip traffic. Automating this is a big **TODO** in order to get 
+ this to deploy on EC2 using the vagrant AWS plugin.

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+
+<Parameters>
+  <Parameter name="bounds">-180,-85.0511,180,85.0511</Parameter>
+  <Parameter name="center">0,0,2</Parameter>
+  <Parameter name="format">png</Parameter>
+  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="maxzoom">22</Parameter>
+  <Parameter name="name"><![CDATA[test]]></Parameter>
+</Parameters>
+
+<FontSet name="fontset-0">
+  <Font face-name="Times New Roman Regular"/>
+  <Font face-name="FreeSerif Medium"/>
+  <Font face-name="DejaVu Serif Book"/>
+</FontSet>
+<Style name="ne110madmin0countrie-label" filter-mode="first" >
+  <Rule>
+    <TextSymbolizer fontset-name="fontset-0" character-spacing="1" line-spacing="4" size="8" wrap-width="120" allow-overlap="false" halo-radius="2" halo-fill="rgba(255, 255, 255, 0.25)" ><![CDATA[[name_sort]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Style name="ne110madmin0countrie" filter-mode="first" >
+  <Rule>
+    <LineSymbolizer stroke="#448833" stroke-width="0.8" />
+    <PolygonSymbolizer fill-opacity="1" fill="#aaee88" />
+  </Rule>
+</Style>
+<Layer name="ne110madmin0countrie"
+  srs="+proj=longlat +ellps=WGS84 +no_defs">
+    <StyleName>ne110madmin0countrie</StyleName>
+    <StyleName>ne110madmin0countrie-label</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/usr/local/app/data/testdata/ne_110m_admin_0_countries2.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>
