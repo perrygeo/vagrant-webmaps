@@ -113,9 +113,9 @@
             );
 
             map.addLayers([base]);  // must have at least one base layer
-            var pnt = new OpenLayers.LonLat(-120.0, 45.0);
+            var pnt = new OpenLayers.LonLat(-20.0, 25.0);
             pnt.transform(latlon, merc);
-            map.setCenter(pnt, 4);
+            map.setCenter(pnt, 2);
         }
     </script>
     <script src="http://madrona2d.labs.ecotrust.org/media/common/js/OpenLayers.js"></script>
@@ -144,7 +144,10 @@
                      <div class="span12">
                         <div class="tabbable">
                             <div class="alert">
-                                    <em>MXD Tile Cutter</em> is an ArcMap extension to generate sets of static map tiles from an existing .mxd. The interface below was automatically generated and uses HTML/JS, OpenLayers and png tiles. No more ArcServer...
+                                    <em>vagrant-webmaps</em> is system for deploying cutting-edge web mapping
+                                    services. This viewer demostrates an OpenLayers-based html/javascript interface
+                                    for interacting with your tile server (which is running TileStache, serving up
+                                    Mapnik-rendered tiles)
                             </div>
                             <ul class="nav nav-tabs" id="formtabs" style="margin-bottom:0px;">
                                 <li class="active">
