@@ -7,7 +7,7 @@ git clone https://github.com/perrygeo/vagrant-webmaps.git
 cd vagrant-webmaps
 vagrant up
 # go get some coffee and come back in 20 minutes
-# point your favorite browser to http://localhost:8088 and get to work
+# point your favorite browser to http://localhost:8088 and get working on those fast, beautiful web maps
 ```
 
 * Builds your virtual server with a single command using Vagrant
