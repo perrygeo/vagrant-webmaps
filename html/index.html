@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Vagrant-webmaps Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="http://madrona2d.labs.ecotrust.org/media/common/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="http://madrona2d.labs.ecotrust.org/media/common/css/jquery-ui.css" rel="stylesheet">
+    <link href="http://madrona2d.labs.ecotrust.org/media/common/css/ui.theme.css" rel="stylesheet">
+    <link href="http://madrona2d.labs.ecotrust.org/media/common/js/theme/default/style.css" rel="stylesheet">
+    <style>
+        .olImageLoadError { 
+            /* when OL encounters a 404, don't display the pink image */
+            display: none !important;
+        }
+        #description-overlay {
+            margin: 6px;
+            background: rg(162, 205, 181, 0.9);
+            bottom: 14px;
+            font-size: 93%;
+            font-weight: bold;
+            position: absolute;
+            z-index: 1043;
+            text-align: left;
+            vertical-align: center;
+            margin-right: 12px;
+        }
+        .outermap {
+            padding: 3px !important;
+        }
+        .tab-content {
+            padding: 14px; 
+            padding-top: 21px;
+            -webkit-border-radius: 0 0 4px 4px;
+            -moz-border-radius: 0 0 4px 4px;
+            border-radius: 0 0 4px 4px;
+        /*
+            background-color: white;
+            border: solid 1px #dddddd; 
+            cursor: default;
+            border-top: 0;
+        */
+        }
+        /* Removes Firefox imposed outline */
+        .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+            outline:none;
+        }
+        .hidden {
+            display: none;
+        }
+        .olControlAttribution {
+            bottom: 5px;
+            font-size: 9px;
+        }
+        body {
+            padding-top: 60px; /* align container with bottom of the topbar */
+        }
+        .olControlAttribution {
+            bottom: 2px !important;
+            font-size: 7pt !important;
+        }
+        img.olTileImage {
+            max-width: 256px !important;
+        }
+        label.olButton {
+            display: inline;
+            padding: 9px 10px 11px;
+            line-height: 24px; 
+        }
+    </style>
+    <link href="http://madrona2d.labs.ecotrust.org/media/common/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"> 
+
+    <script type="text/javascript" src="http://madrona2d.labs.ecotrust.org/media/common/js/jquery.min.js"></script>
+    <script type="text/javascript" src="http://madrona2d.labs.ecotrust.org/media/common/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://madrona2d.labs.ecotrust.org/media/common/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://madrona2d.labs.ecotrust.org/media/common/js/knockout-2.0.0.js"></script>
+    <script type="text/javascript" src="http://madrona2d.labs.ecotrust.org/media/common/js/knockout.mapping-latest.js"></script>
+    <script type="text/javascript" src="http://madrona2d.labs.ecotrust.org/media/common/js/jPaq.min.js"></script>
+    <script type="text/javascript" src="http://madrona2d.labs.ecotrust.org/media/common/js/amplify.min.js"></script>
+    <script type="text/javascript" src="http://madrona2d.labs.ecotrust.org/media/common/js/json2.js" charset="utf-8"></script>
+    <script>
+        var map;
+
+        function init_map() {
+            var latlon = new OpenLayers.Projection("EPSG:4326");
+            var merc = new OpenLayers.Projection("EPSG:900913");
+            var extent = new OpenLayers.Bounds( -124.848974, 24.396308, -66.885444, 49.384358);
+            extent.transform(latlon, merc);
+
+            map = new OpenLayers.Map({
+                div: "map",
+                projection: "EPSG:900913",
+                displayProjection: "EPSG:4326",
+                controls: [
+                    new OpenLayers.Control.Navigation(),
+                    new OpenLayers.Control.Zoom(),
+                    new OpenLayers.Control.Attribution()
+                ],
+                minZoomLevel: 1
+            });
+
+            var base = new OpenLayers.Layer.XYZ( "Base Map",
+                ["http://a1.acetate.geoiq.com/tiles/terrain/${z}/${x}/${y}.png",
+                "http://a2.acetate.geoiq.com/tiles/terrain/${z}/${x}/${y}.png",
+                "http://a3.acetate.geoiq.com/tiles/terrain/${z}/${x}/${y}.png"],
+                {
+                    sphericalMercator: true, 
+                    opacity: 0.2
+                }
+            );
+
+            map.addLayers([base]);  // must have at least one base layer
+            var pnt = new OpenLayers.LonLat(-120.0, 45.0);
+            pnt.transform(latlon, merc);
+            map.setCenter(pnt, 4);
+        }
+    </script>
+    <script src="http://madrona2d.labs.ecotrust.org/media/common/js/OpenLayers.js"></script>
+    <!-- IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://madrona2d.labs.ecotrust.org/media/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://madrona2d.labs.ecotrust.org/media/common/img/favicon.ico">
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/">vagrant-webmaps Viewer</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span6">
+            <div id="scenario-html">
+              <div class="row-fluid">
+                  <div class="row-fluid" id="row-scenarios-list">
+                     <div class="span12">
+                        <div class="tabbable">
+                            <div class="alert">
+                                    <em>MXD Tile Cutter</em> is an ArcMap extension to generate sets of static map tiles from an existing .mxd. The interface below was automatically generated and uses HTML/JS, OpenLayers and png tiles. No more ArcServer...
+                            </div>
+                            <ul class="nav nav-tabs" id="formtabs" style="margin-bottom:0px;">
+                                <li class="active">
+                                    <a href="#data-tab-content" id="data-tab" data-toggle="tab">Data</a>
+                                </li>
+                                <li>
+                                    <a href="#active-tab-content" id="active-tab" data-toggle="tab">Active</a>
+                                </li>
+                                <li>
+                                    <a href="#legend-tab-content" id="legend-tab" data-toggle="tab">Legend</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="active-tab-content" class="tab-pane">
+                                    <div>    <div class="row-fluid">
+        <div class="span12">
+            <div data-bind="visible: layers.activeLayers().length === 0">
+                <div style="padding: 10px;">
+                    <p>
+                        You currently have no activated data layers. 
+                    </p>
+                    <p>
+                        Any layers that are activated in the Data panel will appear in this Active panel.
+                    </p>
+                    <p>
+                        Layers in the Active panel can be adjusted in terms of their transparency and their ordering on the map.
+                    </p>
+                </div>
+            </div>
+            <div data-bind="with: layers">
+                <ul class="unstyled" data-bind="sortable: { data: activeLayers, options: {  } }">
+                    <li>
+                        <div class="btn-group">
+                            <a class="btn btn-layer" data-bind="css: { 'active': visible() }, click: toggleVisible">
+                                <span>
+                                    <i class="icon-large check" 
+                                        data-bind="css: { 'icon-ok': visible(), 'icon-': ! visible() }"></i>
+                                </span>
+                                <span data-bind="text: name"></span>
+                            </a>
+                            <button class="btn btn-info-sign" 
+                                data-bind="click: toggleDescription, css: { 'active': infoActive()}">
+                                <i class="icon-info-sign icon-large"></i>
+                            </button>
+                            <a class="btn opacity-button" data-bind="click: $parent.showOpacity"><i class="icon-adjust icon-large"></i></a>
+                            <button class="btn" data-bind="click: toggleActive">
+                                <i class="icon-remove"></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="opacity-popover" class="popover fade bottom in">
+        <div class="arrow">
+        </div>
+        <div class="popover-inner" data-bind="with: layers">
+            <div class="popover-content" data-bind="if: selectedLayer">
+                <div class="slider" 
+                    data-bind="jqSlider: selectedLayer().opacity, jqOptions: { min: 0, max: 1.01, step: .01, range: 'min' }">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                                </div>
+                                <div id="legend-tab-content" class="tab-pane">
+                                    <div><div data-bind="with: layers">
+    <div data-bind="foreach: activeLegendLayers">
+        <div style="padding-bottom: 10px;">
+            <span class="pagination-centered" data-bind="html: legendTitle ? legendTitle : name"></span>
+            <p style="margin: 0px -5px 3px; text-align: left;font-size: 12px;" 
+                data-bind="visible: legendSubTitle, html: legendSubTitle"></p>
+            <span data-bind="if: legend">
+                <div data-bind="css: { 'in': legendVisibility }" style="padding-top: 5px;">
+                    <img data-bind="attr: { src: legend }" />
+                </div>
+            </span>
+        </div>
+    </div>
+</div>
+</div>
+                                </div>
+                                <div id="data-tab-content" class="tab-pane active"> 
+                                    <div class="">
+                                        <div><form class="form-search">
+    <div>
+        <input type="text" id="layer-search-box" class="search-box" data-provide="typeahead" 
+            data-bind="value: layers.searchTerm, event: { keyup: layers.keySearch }" 
+            style="overflow: hidden; text-overflow: ellipsis;">
+        <span class="add-on"><i class="icon-search"></i></span>
+    </div>
+</form>
+</div>
+                                        <div><div id="data-accordion" data-bind="with: layers">
+    <div id="layers-loading">
+        Loading...
+    </div>
+    <div class="accordion" data-bind="foreach: themes">
+        <div class="accordion-group">
+            <div class="accordion-heading" data-bind="css: { 'active': isOpenTheme() }">
+                <div>
+                    <a class="accordion-toggle"  data-bind="click: setOpenTheme">
+                        <span data-bind="text: name"></span></a>
+                </div>
+            </div>
+            <style>
+                .btn-layer { font-weight: normal; width: 56%; text-align:left; }
+            </style>
+            <div class="accordion-body collapse" data-bind="css: { 'in': isOpenTheme() }">
+                <div class="accordion-inner">
+                    <ul  class="unstyled" data-bind="foreach: layers ">
+                        <li class="layer" data-bind="css: { noSubLayers: subLayers.length === 0 } ">
+                            <div class="btn-group btn-group-layer" data-bind="css: {'open': showSublayers() }">
+
+                                <a class="btn btn-layer btn-small" 
+                                    data-bind="css: { 'active': active(), 'not-active': ! active() }, click: toggleActive">
+                                    <div>
+                                        <i class="icon-ok" data-bind="visible: active() && visible()"></i>
+                                        <i class="icon-eye-close" data-bind="visible: active() && ! visible()"></i>
+                                        <i class="icon-" data-bind="visible: !active()"></i>
+                                        <span data-bind="text: name"></span>
+                                        <span class="caret" style="display:none" data-bind="visible: subLayers.length > 0"></span>
+                                    </div>
+                                </a>
+                                <a class="btn btn-info-sign btn-small" 
+                                    data-bind="click: toggleDescription, css: { 'active': infoActive() }">
+                                    <i class="icon-info-sign icon-large"></i>
+                                </a>
+
+                                <!-- ko if: subLayers.length > 0 -->
+                                    <!-- ko if: !isCheckBoxLayer() -->
+                                    <ul class="dropdown-menu layer-menu" data-bind="event: { mouseleave: closeMenu }">
+                                        <li data-bind="foreach: subLayers">
+                                            <a data-bind="click: toggleActive">
+                                                <span data-bind="style: {visibility: active() ? 'visible': 'hidden' }">• </span>
+                                                <span data-bind="text: name"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- /ko -->
+                                    <!-- ko if: isCheckBoxLayer() -->
+                                    <ul class="dropdown-menu layer-menu" data-bind="event: { mouseleave: closeMenu }">
+                                        <li data-bind="foreach: subLayers">
+                                            <a data-bind="click: toggleActive">
+                                                <span style="margin-left: -10px">
+                                                    <i class="icon-check" data-bind="style: {display: active() ? 'inline': 'none' }"></i>
+                                                    <i style="opacity: .4" class="icon-check-empty" 
+                                                        data-bind="style: {display: ! active() ? 'inline': 'none' }"></i>
+                                                </span>
+                                                <span data-bind="text: name"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                        </li>  
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+                                    </div> </div>
+                          </div> <!-- end tab content -->
+                       </div>  <!-- end tabable -->
+                    </div>
+                </div>
+              </div> <!-- no properties -->
+            </div>
+          </div>
+
+          <div class="span6">
+            <div class="outermap well">
+              <!-- ko with:layers -->
+<div id="description-overlay" class="well" style="display: none" data-bind="visible: showDescription()" >
+    <div class="span11">
+        <h4><span class="title" data-bind="text: activeInfoLayer().name"></span></h4> 
+        <span class="text" data-bind="text: activeInfoLayer().description"></span>
+        <span class="text" data-bind="visible: activeInfoLayer().learn_link">
+            <a class="btn-mini btn" data-bind="attr: { href: activeInfoLayer().learn_link }" 
+                target="_blank">Learn More...</a>
+        </span>  
+    </div>
+    <div class="span1">
+        <a href="#" style="margin-left: 10px; opacity: .6;" class="btn btn-mini pull-right close" 
+            data-bind="click: closeDescription">X</a> 
+    </div>
+</div>
+<!-- /ko -->
+
+              <div id="map"></div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        var app = {
+            viewModel: {},
+            utils: {},
+            updateUrl: function() { /* change url hash */ }
+        };
+    </script>
+
+    <script src="http://madrona2d.labs.ecotrust.org/media/layer_manager/js/map.js"></script>
+    <script src="http://madrona2d.labs.ecotrust.org/media/layer_manager/js/models.js"></script>
+    <script src="http://madrona2d.labs.ecotrust.org/media/layer_manager/js/load.js"></script>
+    <script src="http://madrona2d.labs.ecotrust.org/media/layer_manager/js/knockout-bindings.js"></script>
+    <script src="layers_fixture.js"></script>
+
+    <script>
+        app.onResize = function () {
+            $("#map").height($(window).height() - 78);
+            map.render('map');
+        };
+        
+        $(document).ready(function () {
+            ko.applyBindings(app.viewModel);
+            init_map();
+            app.utils.initMap(map);
+            app.viewModel.layers.loadLayersFromFixture(); 
+            //app.viewModel.layers.loadLayersFromServer(); 
+
+            app.onResize();
+            $(window).resize(app.onResize);
+        });
+    </script>
+
+  </body>
+</html>

@@ -12,7 +12,11 @@ server {
         auth_basic_user_file  /usr/local/app/tilemill-passwords;
     }
 
-    # TODO simple server app
+    # Static viewer 
+    location /viewer/ {
+        autoindex on;    
+        alias /usr/local/app/html/;  
+    }
 
     # Tilestache
     location /tiles {
