@@ -1,0 +1,20 @@
+@serif:"Times New Roman Regular","FreeSerif Medium","DejaVu Serif Book";
+
+#ne110madmin0countrie {
+  line-color:#483;
+  line-width:0.8;
+  polygon-opacity:1;
+  polygon-fill:#ae8;
+}
+#ne110madmin0countrie::label {
+  text-name:"[name_sort]";
+  text-face-name:@serif;
+  text-character-spacing:1;
+  text-line-spacing:4;
+  text-size:8;
+  text-wrap-width:120;
+  text-allow-overlap:false;
+  text-halo-radius:2;
+  text-halo-fill:rgba(255,255,255,0.25);
+}
+
