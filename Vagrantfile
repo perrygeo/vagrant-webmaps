@@ -14,6 +14,6 @@ Vagrant::Config.run do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "app.pp"
     puppet.module_path = "puppet/modules"
-    puppet.options = ["--templatedir","/vagrant/puppet/manifests/files", "--verbose"] #, "--debug"]
+    puppet.options = ["--templatedir","/vagrant/puppet/manifests/files", "--verbose"]
   end
 end

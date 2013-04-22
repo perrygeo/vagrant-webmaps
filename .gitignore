@@ -1,3 +1,5 @@
 *.pyc
 .vagrant
 mapbox/*
+data/*
+xml/*

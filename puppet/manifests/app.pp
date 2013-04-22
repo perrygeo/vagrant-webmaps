@@ -102,5 +102,3 @@ exec { "restart_services":
       File['tiles'], File['tilestache.ini'], Package['supervisor']
   ]
 }
-
-# TODO http://stackoverflow.com/questions/5068518/what-does-redis-do-when-it-runs-out-of-memory
