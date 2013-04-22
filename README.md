@@ -2,12 +2,16 @@
 
 ### Automated deployment of a full-featured tile server and editing environment
 
+First, you've got to install the Pre-requisites: Vagrant, VirtualBox. 
+Optionally, you might want git, python, fabric.
+
+Now [download the code](https://github.com/perrygeo/vagrant-webmaps/archive/master.zip) or 
+checkout a copy with git. Inside the code directory, just run:
+
 ```
-# Pre-requisites: git, Vagrant, VirtualBox. Optional: python, fabric
-git clone https://github.com/perrygeo/vagrant-webmaps.git
-cd vagrant-webmaps
 vagrant up
 ```
+
 Now go get some coffee and come back in roughly 30 minutes. Point
 your favorite browser to http://localhost:8088 and get working on 
 those fast, beautiful web maps.
@@ -22,6 +26,14 @@ vagrant-webmaps handles the following:
 * Caches them with TileStache and Redis
 * Renders them with Mapnik
 * Allows you to view the maps in a web browser with the OpenLayers-based Madrona layer manager.
+
+### URLs
+
+Some helpful URLs to find your way around:
+
+* http://localhost:8088/  : TileMill interface for creating your maps
+* http://localhost:8088/tiles/test_countries  : simple viewer and base URL for the default TileStache layer `test_countries`
+* http://localhost:8088/viewer/  : Example OpenLayers viewer
 
 ### Workflow
 
