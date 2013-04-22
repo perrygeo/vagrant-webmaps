@@ -3,6 +3,7 @@
 ### Automated deployment of a full-featured tile server and editing environment
 
 ```
+# Pre-requisites: git, Vagrant, VirtualBox. Optional: python, fabric
 git clone https://github.com/perrygeo/vagrant-webmaps.git
 cd vagrant-webmaps
 vagrant up
@@ -35,9 +36,10 @@ necessary; tile rendering on-the-fly is a much better option.
 
 ### Fabric 
 
-Instead of ssh, just use local commands to interact with the remote server
+If you have python and the fabric module installed locally, you can run local commands 
+to interact with the remote server for most common tasks
 
- ```
+```
 $ fab --list
 Available commands:
 
