@@ -25,7 +25,6 @@ package { "build-essential": ensure => "installed"}
 package { "python-software-properties": ensure => "installed"}
 package { "git-core": ensure => "latest"}
 package { "vim": ensure => "latest"}
-package { "python-psycopg2": ensure => "latest"}
 package { "python-virtualenv": ensure => "latest"}
 package { "python-pip": ensure => "latest"}
 package { "python-dev": ensure => "latest"}
@@ -96,9 +95,12 @@ file { "redis.conf":
 }
 
 exec { "restart_services":
-  command => "service redis-server restart && service uwsgi restart && service nginx restart && stop tilemill && start tilemill",
+  command => "service redis-server restart && service uwsgi restart && service nginx restart &&
+              ((sudo stop tilemill && sudo start tilemill) || sudo start tilemill)",
   path    => "/usr/local/bin/:/bin/:/usr/bin/:/sbin/",
-  require =>[File['tilemill.config'], File['tilemill.conf'], File['tiles'], File['tilestache.ini']]
+  require =>[File['tilemill.config'], File['tilemill.conf'], 
+      File['tiles'], File['tilestache.ini'], Package['supervisor']
+  ]
 }
 
 # TODO http://stackoverflow.com/questions/5068518/what-does-redis-do-when-it-runs-out-of-memory
