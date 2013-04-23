@@ -32,7 +32,7 @@ vagrant-webmaps handles the following:
 Some helpful URLs to find your way around:
 
 * http://localhost:8088/  : TileMill interface for creating your maps
-* http://localhost:8088/tiles/test_countries  : simple viewer and base URL for the default TileStache layer `test_countries`
+* http://localhost:8088/tiles/test_countries/  : simple viewer and base URL for the default TileStache layer `test_countries`
 * http://localhost:8088/viewer/  : Example OpenLayers viewer
 
 ### Workflow
@@ -61,6 +61,7 @@ Available commands:
 
     clear_cache       Clears ALL the data from the cache. You've been warned.
     clear_layer       Delete keys for a given layer; `clear_layer:test_countr...
+    reconfigure       Looks for new mapnik xml files and creates new config fi..
     restart_services  Restart all map services to ensure config file changes ...
     runserver         Run the test tilestache server for debugging; port 8080...
     tail_log          Watch the tilestache logs
