@@ -64,6 +64,13 @@ def clear_cache():
     run("redis-cli FLUSHALL")
 
 
+def redis_memory():
+    """
+    Show the memory used by the redis cache
+    """
+    run("redis-cli INFO | grep used_memory")
+
+
 def reconfigure():
     """
     Looks for new mapnik xml files and creates new config files (also runs 'restart_services')
