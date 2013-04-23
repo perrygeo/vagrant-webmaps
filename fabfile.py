@@ -62,3 +62,11 @@ def clear_cache():
     Clears ALL the data from the cache. You've been warned.
     """
     run("redis-cli FLUSHALL")
+
+
+def reconfigure():
+    """
+    Looks for new mapnik xml files and creates new config files (also runs 'restart_services')
+    """
+    run("python /usr/local/app/scripts/reconfigure_maps.py")
+    restart_services()
