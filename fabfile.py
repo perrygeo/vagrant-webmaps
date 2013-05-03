@@ -1,5 +1,5 @@
 from fabric.api import *
-
+from fab_vars import *
 env.forward_agent = True
 env.key_filename = '~/.vagrant.d/insecure_private_key'
 
@@ -10,10 +10,10 @@ def dev():
     env.hosts = servers
     return servers
 
-
 def prod():
     """ Use production server settings """
-    servers = []
+    env.key_filename = AWS_KEY_FILENAME
+    servers = [AWS_PUBLIC_DNS]
     env.hosts = servers
     return servers
 

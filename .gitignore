@@ -5,3 +5,4 @@ data/*
 xml/*
 html/*
 tilestache/*
+fab_vars.py
