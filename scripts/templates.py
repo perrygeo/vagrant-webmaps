@@ -39,7 +39,7 @@ tilelayer_template = """
 fixturelayer_template = """{
             "name": "%s", "url": ["/tiles/%s/${z}/${x}/${y}.png"],
             "opacity": 1.0, "lookups": {"field": null, "details": []}, "graphic": null, 
-            "default_on": true, "data_source": "", "subLayers": [],
+            "default_on": false, "data_source": "", "subLayers": [],
             "utfurl": null, "description": null, "arcgis_layers": null, "legend": null, "legend_title": null, 
             "attributes": {"attributes": [], "compress_attributes": false, "event": "click", "title": null}, 
             "fill_opacity": null, "learn_link": null, "type": "XYZ", "id": %d, "color": null, 
